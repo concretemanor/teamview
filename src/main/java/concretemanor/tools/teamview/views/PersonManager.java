@@ -1,6 +1,12 @@
 package concretemanor.tools.teamview.views;
 
 import concretemanor.tools.teamview.Person;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Map;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Manager class that is used to access a "database" of people that is tracked in memory.
@@ -35,7 +41,7 @@ public class PersonManager {
     }
 
     /** Gets a list of all the people in the system. */
-    public List<Person> getAllPeople(Date date) {
+    public List<Person> getAllPeople() {
         return Collections.unmodifiableList( new ArrayList<Person>(people.values()) );
     }
 

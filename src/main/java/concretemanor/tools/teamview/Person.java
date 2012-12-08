@@ -1,27 +1,57 @@
 package concretemanor.tools.teamview;
 
-public class Person {
-    private int id;
-    public int getId() {
-	return id;
-    }
-    public void setId(int id) {
-	this.id = id;
-    }
+public class Person implements Comparable<Person> {
 
-    private String name;
-    public String getName() {
-	return name;
-    }
-    public void setName(String name) {
-	this.name = name;
-    }
+	public Person(String name) {
+		this.name = name;
+	}
 
-    private String[] status;
-    public String[] getStatus() {
-	return status;
-    }
-    public void setStatus(String[] status) {
-	this.status = status;
-    }
+	private Integer id;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	private Status[] status;
+	public Status[] getStatus() {
+		return status;
+	}
+	public void setStatus(Status[] status) {
+		this.status = status;
+	}
+
+	public int compareTo(Person o) {
+		int result = id - o.id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		boolean result;
+		if (! (o instanceof Person)) {
+			result = false;
+		}
+		else {
+			Person other = (Person)o;
+			result = other.id == id;
+		}
+
+		return result;
+	}
+	
+	@Override
+	public String toString() {
+		String result = String.valueOf("id="+id);
+		return result;
+	}
 }

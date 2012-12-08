@@ -1,3 +1,7 @@
 .date-heading {
-	text-align: center
+	text-align: center;
 }
+table,td {
+	border: 1px solid black;
+}
+	
