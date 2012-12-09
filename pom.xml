@@ -209,6 +209,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+	        <version>2.12.4</version>
                 <configuration>
                     <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=512m</argLine>
                     <forkMode>none</forkMode>
