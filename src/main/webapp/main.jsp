@@ -12,10 +12,13 @@
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
+       <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
+           <stripes:label for="teams"/>: <stripes:select class='team-menu' name='teams'><stripes:option value="1">Team A</stripes:option><stripes:option value="2">Team B</stripes:option><stripes:option value="3">Team C</stripes:option></stripes:select>
+       </stripes:form>
     <h1>WHERE WILL YOU BE?</h1>
     <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
-        <stripes:hidden id="refdate" name="date" value="${actionBean.date}" />
-        <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
+        <stripes:hidden id="refdate" name="date" value="${actionBean.date}" />	
+<div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
         <table>
 	    <tr class="date-heading">
 	        <th></th>
