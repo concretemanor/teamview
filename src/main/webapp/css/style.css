@@ -1,7 +1,45 @@
+body {
+    background-image: url(background.jpg);
+}
+
+* {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
 .date-heading {
-	text-align: center;
+    text-align: center;
 }
 table,td {
-	border: 1px solid black;
+    border: 1px solid lightgrey;
+    border-collapse: collapse;
+    font-size: 10pt;
 }
-	
+td.person-name {
+    font-weight: bold;
+}
+select {
+    border-width: 0;
+}
+option[value='IN_OFFICE'] {
+    background-color: white;
+}
+option[value='WORKING_FROM_HOME'] {
+    background-color: yellow;
+}
+option[value='VACATION'] {
+    background-color: red;
+    color: white;
+}
+h1 {
+    text-align: center;
+    font-family: impact;
+    font-size: 42pt;
+    font-weight: normal;
+    width: 900px;
+}
+.date-nav {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 900px;
+}
+    

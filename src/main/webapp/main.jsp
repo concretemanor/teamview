@@ -12,22 +12,22 @@
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <h1>Team Availability</h1>
+    <h1>WHERE WILL YOU BE?</h1>
     <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
         <stripes:hidden id="refdate" name="date" value="${actionBean.date}" />
-        <div><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><stripes:submit name="forward" value=">" /> <fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /> </div>
+        <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
         <table>
 	    <tr class="date-heading">
-	        <td></td>
-	        <td>Mon <fmt:formatDate value="${actionBean.monday}" pattern="MM/dd" /></td>
-	        <td>Tue <fmt:formatDate value="${actionBean.tuesday}" pattern="MM/dd" /></td>
-	        <td>Wed <fmt:formatDate value="${actionBean.wednesday}" pattern="MM/dd" /></td>
-	        <td>Thu <fmt:formatDate value="${actionBean.thursday}" pattern="MM/dd" /></td>
-	        <td>Fri <fmt:formatDate value="${actionBean.friday}" pattern="MM/dd" /></td>
+	        <th></th>
+	        <th>Mon <fmt:formatDate value="${actionBean.monday}" pattern="MM/dd" /></th>
+	        <th>Tue <fmt:formatDate value="${actionBean.tuesday}" pattern="MM/dd" /></th>
+	        <th>Wed <fmt:formatDate value="${actionBean.wednesday}" pattern="MM/dd" /></th>
+	        <th>Thu <fmt:formatDate value="${actionBean.thursday}" pattern="MM/dd" /></th>
+	        <th>Fri <fmt:formatDate value="${actionBean.friday}" pattern="MM/dd" /></th>
 	    </tr>
 	    <c:forEach items="${actionBean.allPeople}" var="person" varStatus="loop">
 	      <tr>
-		<td>${person.name}</td>
+		<td class='person-name'>${person.name}</td>
 		<td class='status' id="0${person.id}">
 		   <stripes:select class="statusmenu" name="status" value='${person.status[0]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>

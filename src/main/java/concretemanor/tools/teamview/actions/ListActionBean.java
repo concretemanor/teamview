@@ -81,14 +81,14 @@ public class ListActionBean implements ActionBean {
 	public Date getLastDate() {
 		return dateFrom(6);
 	}
-	
+
 	public List<Person> getAllPeople() {
 		List<Person> result = new ArrayList<Person>();
 		for (Person person : pm.getAllPeople()) {
 			person.setStatus(psm.getForWeek(person, date));
 			result.add(person);
 		}
-		
+
 		return result;
 	}
 
@@ -126,7 +126,7 @@ public class ListActionBean implements ActionBean {
 		if ("update".equals(event)) { // TBD remove this hack
 			return update();
 		}
-		
+
 		loggie.debug("in view");
 		GregorianCalendar gCal = new GregorianCalendar();
 		gCal.setTime(new Date());
@@ -135,14 +135,19 @@ public class ListActionBean implements ActionBean {
 		gCal.set(Calendar.SECOND,0);
 		gCal.set(Calendar.MILLISECOND,0);
 
-		// find most recent Sunday
-		while (gCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
-			gCal.add(Calendar.DAY_OF_YEAR, -1);
+		// if today is a weekday, find most recent Sunday, otherwise find the first Sunday not in the past
+		if (gCal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+			gCal.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		else {
+			while (gCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+				gCal.add(Calendar.DAY_OF_YEAR, -1);
+			}
 		}
 		setDate(gCal.getTime());
 		return refresh();
 	}
-	
+
 	private String event;
 	public void setEvent(String event) {
 		this.event = event;
@@ -154,7 +159,7 @@ public class ListActionBean implements ActionBean {
 		Date date = dateFrom(dayIndex);
 		loggie.debug("update "+personId+" "+dayIndex+" "+date+" "+cellValue);
 		psm.save(pm.getPerson(personId),date,cellValue);
-		
+
 		return refresh();
 	}
 }
