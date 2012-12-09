@@ -26,10 +26,6 @@ public class ListActionBean implements ActionBean {
 	private PersonManager pm = new PersonManager();
 	private PersonStatusManager psm = new PersonStatusManager();
 
-	public ListActionBean() {
-		loggie.debug("in ListActionBean constructor");
-	}
-
 	@Override
 	public void setContext(ActionBeanContext context) {
 		this.context = context;
@@ -46,9 +42,19 @@ public class ListActionBean implements ActionBean {
 		return date;
 	}
 
+	private Date toMidnight(Date d) {
+		GregorianCalendar gCal = new GregorianCalendar();
+		gCal.setTime(d);
+		gCal.set(Calendar.HOUR_OF_DAY,0);
+		gCal.set(Calendar.MINUTE,0);
+		gCal.set(Calendar.SECOND,0);
+		gCal.set(Calendar.MILLISECOND,0);
+
+		return gCal.getTime();
+	}
+		
 	public void setDate(Date date) {
-		loggie.debug("setDate: "+date);
-		this.date = date;
+		this.date = toMidnight(date);
 	}
 
 	private Date dateFrom(int delta) {
@@ -130,12 +136,7 @@ public class ListActionBean implements ActionBean {
 		loggie.debug("in view");
 		GregorianCalendar gCal = new GregorianCalendar();
 		gCal.setTime(new Date());
-		gCal.set(Calendar.HOUR,0);
-		gCal.set(Calendar.MINUTE,0);
-		gCal.set(Calendar.SECOND,0);
-		gCal.set(Calendar.MILLISECOND,0);
-
-		// if today is a weekday, find most recent Sunday, otherwise find the first Sunday not in the past
+		// if today is Saturday, go forward a day; otherwise find the most recent Sunday
 		if (gCal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
 			gCal.add(Calendar.DAY_OF_YEAR, 1);
 		}
@@ -145,6 +146,7 @@ public class ListActionBean implements ActionBean {
 			}
 		}
 		setDate(gCal.getTime());
+
 		return refresh();
 	}
 
