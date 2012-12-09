@@ -1,7 +1,7 @@
 package concretemanor.tools.teamview.dao;
 
-import concretemanor.tools.teamview.builders.TeamBuilder;
-import concretemanor.tools.teamview.domain.Team;
+import static org.junit.Assert.assertEquals;
+
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import static org.junit.Assert.*;
+import concretemanor.tools.teamview.builders.TeamBuilder;
+import concretemanor.tools.teamview.domain.Team;
 
 /**
  * User: shin4590

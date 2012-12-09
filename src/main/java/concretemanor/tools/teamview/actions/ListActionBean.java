@@ -35,7 +35,7 @@ public class ListActionBean implements ActionBean {
 	public ActionBeanContext getContext() {
 		return context;
 	}
-
+	
 	private Date date;
 
 	public Date getDate() {

@@ -1,10 +1,10 @@
 package concretemanor.tools.teamview.builders;
 
+import java.util.Date;
+
 import concretemanor.tools.teamview.domain.Person;
 import concretemanor.tools.teamview.domain.PersonStatus;
 import concretemanor.tools.teamview.domain.Status;
-
-import java.util.Date;
 
 /**
  * User: shin4590

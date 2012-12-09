@@ -1,9 +1,9 @@
 package concretemanor.tools.teamview.dao;
 
+import java.util.List;
+
 import concretemanor.tools.teamview.domain.Person;
 import concretemanor.tools.teamview.domain.Team;
-
-import java.util.List;
 
 /**
  * User: shin4590

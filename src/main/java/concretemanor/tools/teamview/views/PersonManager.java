@@ -1,11 +1,12 @@
 package concretemanor.tools.teamview.views;
 
-import concretemanor.tools.teamview.domain.Person;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
+
+import concretemanor.tools.teamview.domain.Person;
 
 /**
  * Manager class that is used to access a "database" of people that is tracked in memory.

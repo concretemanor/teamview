@@ -1,10 +1,10 @@
 package concretemanor.tools.teamview.dao;
 
-import concretemanor.tools.teamview.domain.PersonStatus;
-import concretemanor.tools.teamview.domain.Team;
-
 import java.util.Date;
 import java.util.List;
+
+import concretemanor.tools.teamview.domain.PersonStatus;
+import concretemanor.tools.teamview.domain.Team;
 
 /**
  * User: shin4590

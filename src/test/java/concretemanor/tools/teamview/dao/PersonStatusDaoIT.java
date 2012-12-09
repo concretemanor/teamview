@@ -1,13 +1,13 @@
 package concretemanor.tools.teamview.dao;
 
-import concretemanor.tools.teamview.builders.DateBuilder;
-import concretemanor.tools.teamview.builders.PersonBuilder;
-import concretemanor.tools.teamview.builders.PersonStatusBuilder;
-import concretemanor.tools.teamview.builders.TeamBuilder;
-import concretemanor.tools.teamview.domain.Person;
-import concretemanor.tools.teamview.domain.PersonStatus;
-import concretemanor.tools.teamview.domain.Status;
-import concretemanor.tools.teamview.domain.Team;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import concretemanor.tools.teamview.builders.PersonBuilder;
+import concretemanor.tools.teamview.builders.PersonStatusBuilder;
+import concretemanor.tools.teamview.builders.TeamBuilder;
+import concretemanor.tools.teamview.domain.Person;
+import concretemanor.tools.teamview.domain.PersonStatus;
+import concretemanor.tools.teamview.domain.Status;
+import concretemanor.tools.teamview.domain.Team;
 
 /**
  * User: shin4590

@@ -1,7 +1,6 @@
 package concretemanor.tools.teamview.views;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.

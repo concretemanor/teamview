@@ -1,13 +1,13 @@
 package concretemanor.tools.teamview.dao.impl;
 
-import concretemanor.tools.teamview.dao.TeamDao;
-import concretemanor.tools.teamview.domain.Team;
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import concretemanor.tools.teamview.dao.TeamDao;
+import concretemanor.tools.teamview.domain.Team;
 import java.util.List;
 
 /**

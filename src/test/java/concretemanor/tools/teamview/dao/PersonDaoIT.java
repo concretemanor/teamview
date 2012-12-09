@@ -1,9 +1,10 @@
 package concretemanor.tools.teamview.dao;
 
-import concretemanor.tools.teamview.builders.PersonBuilder;
-import concretemanor.tools.teamview.builders.TeamBuilder;
-import concretemanor.tools.teamview.domain.Person;
-import concretemanor.tools.teamview.domain.Team;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import concretemanor.tools.teamview.builders.PersonBuilder;
+import concretemanor.tools.teamview.builders.TeamBuilder;
+import concretemanor.tools.teamview.domain.Person;
+import concretemanor.tools.teamview.domain.Team;
 
 /**
  * User: shin4590
