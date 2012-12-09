@@ -3,6 +3,8 @@ package concretemanor.tools.teamview.dao.impl;
 import concretemanor.tools.teamview.dao.PersonStatusDao;
 import concretemanor.tools.teamview.domain.Person;
 import concretemanor.tools.teamview.domain.PersonStatus;
+import concretemanor.tools.teamview.domain.Team;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
  * User: shin4590
  * Date: 12/8/12
- * Time: 10:04 PM
- * To change this template use File | Settings | File Templates.
  */
 @Repository
 public class PersonStatusDaoHibernateImpl implements PersonStatusDao {
@@ -29,10 +28,25 @@ public class PersonStatusDaoHibernateImpl implements PersonStatusDao {
     }
 
     @Override
-    public List<PersonStatusDao> getByDateRange(Date minDate, Date maxDate) {
+    public List<PersonStatus> getByDateRange(Date minDate, Date maxDate) {
         final Query query = sessionFactory.getCurrentSession().getNamedQuery(PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE);
         query.setParameter("minDate", minDate);
         query.setParameter("maxDate", maxDate);
         return query.list();
+    }
+
+    @Override
+    public List<PersonStatus> getByTeamAndDateRange(Team team, Date minDate, Date maxDate) {
+        final Query query = sessionFactory.getCurrentSession().getNamedQuery(PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE);
+        query.setParameter("team", team);
+        query.setParameter("minDate", minDate);
+        query.setParameter("maxDate", maxDate);
+        return query.list();
+    }
+
+    @Override
+    public PersonStatus save(PersonStatus pstatus) throws HibernateException {
+        sessionFactory.getCurrentSession().save(pstatus);
+        return pstatus;
     }
 }
