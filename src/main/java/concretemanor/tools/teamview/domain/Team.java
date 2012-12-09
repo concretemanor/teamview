@@ -17,11 +17,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "`TMV_Team`")
 @NamedQueries(value = {
-    @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_NAME, query="from Team where teamName=:teamName")
+    @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_NAME, query="from Team where teamName=:teamName"),
+    @NamedQuery(name=Team.NAMED_QUERY_ALL_TEAMS, query="from Team")
 })
 public class Team implements Serializable {
 
     public final static String NAMED_QUERY_TEAM_BY_NAME = "query.team.by.name";
+
+    public final static String NAMED_QUERY_ALL_TEAMS = "query.all.teams";
 
     private Integer id;
 

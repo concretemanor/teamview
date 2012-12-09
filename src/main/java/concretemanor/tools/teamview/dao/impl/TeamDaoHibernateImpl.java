@@ -8,6 +8,8 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * User: shin4590
  * Date: 12/8/12
@@ -28,6 +30,12 @@ public class TeamDaoHibernateImpl implements TeamDao {
         query.setParameter("teamName", name);
         return (Team) query.uniqueResult();
 
+    }
+
+    @Override
+    public List<Team> getAll() throws HibernateException {
+        final Query query = sessionFactory.getCurrentSession().getNamedQuery(Team.NAMED_QUERY_ALL_TEAMS);
+        return query.list();
     }
 
     @Override
