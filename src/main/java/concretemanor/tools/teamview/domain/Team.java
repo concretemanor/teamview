@@ -2,6 +2,7 @@ package concretemanor.tools.teamview.domain;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.NaturalId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,9 +16,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "`TMV_Team`")
+@NamedQueries(value = {
+    @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_NAME, query="from Team where teamName=:teamName")
+})
 public class Team implements Serializable {
 
-    private Long id;
+    public final static String NAMED_QUERY_TEAM_BY_NAME = "query.team.by.name";
+
+    private Integer id;
 
     private String teamName;
 
@@ -27,11 +33,11 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERATOR")
     @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_Team_ID_seq`", allocationSize = 1)
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,6 +52,7 @@ public class Team implements Serializable {
         this.createdDate = createdDate;
     }
 
+    @NaturalId
     @Column(name = "`TeamName`", nullable = false)
     public String getTeamName() {
         return teamName;

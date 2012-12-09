@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.sourceforge.stripes.util.Log;
-import concretemanor.tools.teamview.Person;
-import concretemanor.tools.teamview.Status;
+import concretemanor.tools.teamview.domain.Person;
+import concretemanor.tools.teamview.domain.Status;
 
 /**
  * Manager class that is used to access a "database" of mapping from people to (date,status) pairs.

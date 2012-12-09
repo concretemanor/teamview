@@ -13,8 +13,8 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.util.Log;
-import concretemanor.tools.teamview.Person;
-import concretemanor.tools.teamview.Status;
+import concretemanor.tools.teamview.domain.Person;
+import concretemanor.tools.teamview.domain.Status;
 import concretemanor.tools.teamview.views.PersonManager;
 import concretemanor.tools.teamview.views.PersonStatusManager;
 

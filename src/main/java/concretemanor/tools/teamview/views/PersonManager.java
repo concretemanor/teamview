@@ -1,9 +1,8 @@
 package concretemanor.tools.teamview.views;
 
-import concretemanor.tools.teamview.Person;
+import concretemanor.tools.teamview.domain.Person;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Map;
 import java.util.List;
 import java.util.TreeMap;

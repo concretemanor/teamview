@@ -1,4 +1,4 @@
-package concretemanor.tools.teamview;
+package concretemanor.tools.teamview.domain;
 
 public enum Status {
     IN_OFFICE,
