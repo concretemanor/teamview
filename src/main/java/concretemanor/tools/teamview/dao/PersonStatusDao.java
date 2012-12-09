@@ -1,5 +1,8 @@
 package concretemanor.tools.teamview.dao;
 
+import concretemanor.tools.teamview.domain.PersonStatus;
+import concretemanor.tools.teamview.domain.Team;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,5 +12,27 @@ import java.util.List;
  */
 public interface PersonStatusDao {
 
-    public List<PersonStatusDao> getByDateRange(Date minDate, Date maxDate);
+    /**
+     * Gets a list of PersonStatus by range of dates
+     * @param minDate
+     * @param maxDate
+     * @return
+     */
+    public List<PersonStatus> getByDateRange(Date minDate, Date maxDate);
+
+    /**
+     * Gets a list of PersonStatus for a specific Team, by range of dates
+     * @param team
+     * @param minDate
+     * @param maxDate
+     * @return
+     */
+    public List<PersonStatus> getByTeamAndDateRange(Team team, Date minDate, Date maxDate);
+
+    /**
+     * Saves the PersonStatus object
+     * @param pstatus
+     * @return
+     */
+    public PersonStatus save(PersonStatus pstatus);
 }

@@ -9,20 +9,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created with IntelliJ IDEA.
  * User: shin4590
  * Date: 12/8/12
- * Time: 9:35 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 @Table(name = "`TMV_PersonStatus`")
 @NamedQueries(value = {
-        @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE, query="from PersonStatus where dateOfStatus>=:minDate and dateOfStatus<=:maxDate")
+        @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE,
+                query="from PersonStatus where dateOfStatus>=:minDate and dateOfStatus<=:maxDate"),
+        @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE,
+                query="from PersonStatus where person.team=:team and dateOfStatus>=:minDate and dateOfStatus<=:maxDate")
 })
 public class PersonStatus implements Serializable {
 
     public final static String NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE = "query.personStatus.by.dateRange";
+
+    public final static String NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE = "query.personStatus.by.team.and.dateRange";
 
     private Integer id;
     @Column(name = "`ID`")
