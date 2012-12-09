@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WEBAPPS=/var/lib/tomcat7/webapps
+NAME=teamview-1.0.0-SNAPSHOT
+
+rm -rf $WEBAPPS/teamview $WEBAPPS/teamview.war
+cp target/$NAME.war $WEBAPPS/teamview.war
+/etc/init.d/tomcat7 stop
+/etc/init.d/tomcat7 start
+
+
