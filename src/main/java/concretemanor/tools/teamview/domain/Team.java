@@ -45,7 +45,7 @@ public class Team implements Serializable {
 
     @Column(name = "`ID`")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERATOR")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "GENERATOR")
     @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_Team_ID_seq`", allocationSize = 1)
     public Integer getId() {
         return id;
@@ -66,8 +66,7 @@ public class Team implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @NaturalId
-    @Column(name = "`TeamName`", nullable = false)
+    @Column(name = "`TeamName`", nullable = false, unique = true)
     public String getTeamName() {
         return teamName;
     }
