@@ -75,18 +75,13 @@
             </c:forEach>
         </table>
     </stripes:form>
-    <stripes:form id="cellForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
+    <stripes:form id="changeForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
     	<stripes:hidden id="cellId" name="cellId" />
     	<stripes:hidden id="cellValue" name="cellValue" />
 	<stripes:hidden id="cellDate" name="date" />
-	<stripes:hidden id="cellTeamId" name="teamId" />
-    	<stripes:hidden name="event" value="update" />
-    </stripes:form>
-
-    <stripes:form id="teamForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
-       <stripes:hidden id="teamId" name="teamId" />
-       <stripes:hidden id="teamDate" name="date" />
-       <stripes:hidden name="event" value="changeTeam" />
+    	<stripes:hidden id="event" name="event" />
+	<stripes:hidden id="teamId" name="teamId" />
+        <stripes:hidden id="teamDate" name="date" />
     </stripes:form>
   </body>
 </html>

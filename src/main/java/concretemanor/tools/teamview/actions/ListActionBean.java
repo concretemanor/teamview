@@ -153,8 +153,8 @@ public class ListActionBean implements ActionBean {
 
 	@DefaultHandler
 	public Resolution view() {
-		if ("update".equals(event)) { // TBD remove this hack
-			return update();
+		if ("changeStatus".equals(event)) { // TBD remove this hack
+			return changeStatus();
 		}
 		else if ("changeTeam".equals(event)) {
 			return changeTeam();
@@ -182,7 +182,7 @@ public class ListActionBean implements ActionBean {
 		this.event = event;
 	}
 
-	public Resolution update() {
+	public Resolution changeStatus() {
 		int personId = Integer.valueOf(cellId.substring(1));
 		int dayIndex = Integer.valueOf(cellId.substring(0,1));
 		Date date = dateFrom(dayIndex);
