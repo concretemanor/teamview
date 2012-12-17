@@ -28,10 +28,6 @@ public class Person implements Comparable<Person> {
 
     public final static String NAMED_QUERY_PERSONS_BY_TEAM = "query.persons.by.team";
 
-	public Person(String name) {
-		this.name = name;
-	}
-
 	private Integer id;
     @Column(name = "`ID`")
     @Id

@@ -19,7 +19,8 @@ public class PersonBuilder {
     }
 
     public PersonBuilder withName(String name) {
-        person = new Person(name);
+        person = new Person();
+        person.setName(name);
         return this;
     }
 

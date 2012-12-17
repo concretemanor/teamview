@@ -1,6 +1,5 @@
 package concretemanor.tools.teamview.actions;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,9 +11,15 @@ import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.util.Log;
-import concretemanor.tools.teamview.domain.Person;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import concretemanor.tools.teamview.domain.Status;
+import concretemanor.tools.teamview.domain.Team;
+import concretemanor.tools.teamview.service.IService;
+import concretemanor.tools.teamview.service.WeekStatus;
 import concretemanor.tools.teamview.views.PersonManager;
 import concretemanor.tools.teamview.views.PersonStatusManager;
 
@@ -23,9 +28,12 @@ public class ListActionBean implements ActionBean {
 	private static Log loggie = Log.getInstance(ListActionBean.class);
 
 	private ActionBeanContext context;
+
+	@SpringBean
+	private IService service;
 	private PersonManager pm = new PersonManager();
 	private PersonStatusManager psm = new PersonStatusManager();
-
+	
 	@Override
 	public void setContext(ActionBeanContext context) {
 		this.context = context;
@@ -36,6 +44,19 @@ public class ListActionBean implements ActionBean {
 		return context;
 	}
 	
+	protected IService getService() {
+		return service;
+	}
+	
+	private Integer teamId = 1;
+	public Integer getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(Integer teamId) {
+		loggie.debug("setTeam: teamId="+teamId);
+		this.teamId = teamId;
+	}
+
 	private Date date;
 
 	public Date getDate() {
@@ -88,12 +109,15 @@ public class ListActionBean implements ActionBean {
 		return dateFrom(6);
 	}
 
-	public List<Person> getAllPeople() {
-		List<Person> result = new ArrayList<Person>();
-		for (Person person : pm.getAllPeople()) {
-			person.setStatus(psm.getForWeek(person, date));
-			result.add(person);
-		}
+	public List<Team> getAllTeams() {
+		List<Team> result = service.getAllTeams();
+		return result;
+	}
+	
+	public List<WeekStatus> getWeekStatuses() {
+		Team team = service.getTeamById(teamId);
+		List<WeekStatus> result = service.getByTeamForWeek(team,date);
+		loggie.debug("getWeekStatuses returns "+result);
 
 		return result;
 	}
@@ -132,6 +156,9 @@ public class ListActionBean implements ActionBean {
 		if ("update".equals(event)) { // TBD remove this hack
 			return update();
 		}
+		else if ("changeTeam".equals(event)) {
+			return changeTeam();
+		}
 
 		loggie.debug("in view");
 		GregorianCalendar gCal = new GregorianCalendar();
@@ -160,8 +187,13 @@ public class ListActionBean implements ActionBean {
 		int dayIndex = Integer.valueOf(cellId.substring(0,1));
 		Date date = dateFrom(dayIndex);
 		loggie.debug("update "+personId+" "+dayIndex+" "+date+" "+cellValue);
-		psm.save(pm.getPerson(personId),date,cellValue);
+		service.updateStatus(personId,date,cellValue);
 
+		return refresh();
+	}
+	
+	public Resolution changeTeam() {
+		loggie.debug("team changed to "+teamId);
 		return refresh();
 	}
 }

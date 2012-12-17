@@ -1,8 +1,8 @@
 package concretemanor.tools.teamview.dao;
 
-import concretemanor.tools.teamview.domain.Team;
-
 import java.util.List;
+
+import concretemanor.tools.teamview.domain.Team;
 
 /**
  * User: shin4590
@@ -16,6 +16,13 @@ public interface TeamDao {
      * @return Team
      */
     public Team getByName(String name);
+    
+    /**
+     * Gets the Team object by its name
+     * @param id ID of the Team object to fetch
+     * @return Team
+     */
+    public Team get(Integer id);
 
     /**
      * Gets all the Team

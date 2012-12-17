@@ -13,12 +13,17 @@
   </head>
   <body>
        <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
-           <stripes:label for="teams"/>: <stripes:select class='team-menu' name='teams'><stripes:option value="1">Team A</stripes:option><stripes:option value="2">Team B</stripes:option><stripes:option value="3">Team C</stripes:option></stripes:select>
+           <stripes:label for="team"/>: <stripes:select class='teammenu' name='team' value="${actionBean.teamId}">
+           <c:forEach items="${actionBean.allTeams}" var="team" varStatus="loop">
+           	  <stripes:option value="${team.id}">${team.teamName}</stripes:option>
+           </c:forEach>
+           </stripes:select>
        </stripes:form>
     <h1>WHERE WILL YOU BE?</h1>
     <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
         <stripes:hidden id="refdate" name="date" value="${actionBean.date}" />	
 <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
+        <stripes:hidden name="teamId" value="${actionBean.teamId}" />
         <table>
 	    <tr class="date-heading">
 	        <th></th>
@@ -28,39 +33,39 @@
 	        <th>Thu <fmt:formatDate value="${actionBean.thursday}" pattern="MM/dd" /></th>
 	        <th>Fri <fmt:formatDate value="${actionBean.friday}" pattern="MM/dd" /></th>
 	    </tr>
-	    <c:forEach items="${actionBean.allPeople}" var="person" varStatus="loop">
+	    <c:forEach items="${actionBean.weekStatuses}" var="weekStatus" varStatus="loop">
 	      <tr>
-		<td class='person-name'>${person.name}</td>
-		<td class='status' id="0${person.id}">
-		   <stripes:select class="statusmenu" name="status" value='${person.status[0]}'>
+		<td class='person-name'>${weekStatus.person.name}</td>
+		<td class='status' id="1${weekStatus.person.id}">
+		   <stripes:select class="statusmenu" name="status" value='${weekStatus.statuses[0]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
 		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
 		      <stripes:option value="VACATION">Vacation</stripes:option>
 		   </stripes:select>
 		</td>
-		<td class='status' id="1${person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${person.status[1]}'>
+		<td class='status' id="2${weekStatus.person.id}">
+		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[1]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
 		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
 		      <stripes:option value="VACATION">Vacation</stripes:option>
 		   </stripes:select>
 		</td>
-		<td class='status' id="2${person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${person.status[2]}'>
+		<td class='status' id="3${weekStatus.person.id}">
+		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[2]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
 		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
 		      <stripes:option value="VACATION">Vacation</stripes:option>
 		   </stripes:select>
 		</td>
-		<td class='status' id="3${person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${person.status[3]}'>
+		<td class='status' id="4${weekStatus.person.id}">
+		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[3]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
 		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
 		      <stripes:option value="VACATION">Vacation</stripes:option>
 		   </stripes:select>
 		</td>
-		<td class='status' id="4${person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${person.status[4]}'>
+		<td class='status' id="5${weekStatus.person.id}">
+		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[4]}'>
 		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
 		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
 		      <stripes:option value="VACATION">Vacation</stripes:option>
@@ -73,8 +78,15 @@
     <stripes:form id="cellForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
     	<stripes:hidden id="cellId" name="cellId" />
     	<stripes:hidden id="cellValue" name="cellValue" />
-	<stripes:hidden id="date" name="date" />
+	<stripes:hidden id="cellDate" name="date" />
+	<stripes:hidden id="cellTeamId" name="teamId" />
     	<stripes:hidden name="event" value="update" />
+    </stripes:form>
+
+    <stripes:form id="teamForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
+       <stripes:hidden id="teamId" name="teamId" />
+       <stripes:hidden id="teamDate" name="date" />
+       <stripes:hidden name="event" value="changeTeam" />
     </stripes:form>
   </body>
 </html>

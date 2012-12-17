@@ -19,19 +19,19 @@ public class PersonManager {
     private static Map<Integer,Person> people = new TreeMap<Integer,Person>();
 
     static {
-        Person person = new Person("John");
+        Person person = new Person() {{ setName("John"); }};
         saveOrUpdateInternal(person);
 
-        person = new Person("Mary");
+        person = new Person() {{ setName("Mary"); }};
         saveOrUpdateInternal(person);
 
-        person = new Person("Shinta");
+        person = new Person() {{ setName("Shinta"); }};
         saveOrUpdateInternal(person);
 
-        person = new Person("Sanjay");
+        person = new Person() {{ setName("Sanjay"); }};
         saveOrUpdateInternal(person);
 
-        person = new Person("Xiaoping");
+        person = new Person() {{ setName("Xiaoping"); }};
         saveOrUpdateInternal(person);
     }
 

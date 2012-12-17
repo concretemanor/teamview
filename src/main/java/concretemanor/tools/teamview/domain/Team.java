@@ -28,12 +28,13 @@ import org.hibernate.annotations.NaturalId;
 @Table(name = "`TMV_Team`")
 @NamedQueries(value = {
     @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_NAME, query="from Team where teamName=:teamName"),
-    @NamedQuery(name=Team.NAMED_QUERY_ALL_TEAMS, query="from Team")
+    @NamedQuery(name=Team.NAMED_QUERY_ALL_TEAMS, query="from Team"),
+    @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_ID, query="from Team where id=:id")
 })
 public class Team implements Serializable {
 
     public final static String NAMED_QUERY_TEAM_BY_NAME = "query.team.by.name";
-
+    public final static String NAMED_QUERY_TEAM_BY_ID = "query.team.by.id";
     public final static String NAMED_QUERY_ALL_TEAMS = "query.all.teams";
 
     private Integer id;
@@ -73,6 +74,10 @@ public class Team implements Serializable {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+    
+    public String toString() {
+    	return "id "+id+" teamName "+teamName;
     }
 
 }
