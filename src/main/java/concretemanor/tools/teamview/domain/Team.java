@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 
 /**
@@ -43,10 +44,10 @@ public class Team implements Serializable {
 
     private Date createdDate;
 
-    @Column(name = "`ID`")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "GENERATOR")
-    @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_Team_ID_seq`", allocationSize = 1)
+    @Column(name = "`ID`")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "teamId")
+    @SequenceGenerator(name = "teamId", sequenceName = "`TMV_Team_ID_seq`", allocationSize = 1)
     public Integer getId() {
         return id;
     }

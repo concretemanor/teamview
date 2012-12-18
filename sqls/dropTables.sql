@@ -1,0 +1,7 @@
+
+DROP TABLE "TMV_PersonStatus";
+DROP SEQUENCE "TMV_PersonStatus_ID_seq";
+DROP TABLE "TMV_Person";
+DROP SEQUENCE "TMV_Person_ID_seq";
+DROP TABLE "TMV_Team";
+DROP SEQUENCE "TMV_Team_ID_seq";

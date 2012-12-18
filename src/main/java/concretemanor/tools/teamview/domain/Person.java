@@ -29,9 +29,9 @@ public class Person implements Comparable<Person> {
     public final static String NAMED_QUERY_PERSONS_BY_TEAM = "query.persons.by.team";
 
 	private Integer id;
-    @Column(name = "`ID`")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GENERATOR")
+    @Column(name = "`ID`")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GENERATOR")
     @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_Person_ID_seq`", allocationSize = 1)
 	public Integer getId() {
 		return id;
@@ -61,13 +61,13 @@ public class Person implements Comparable<Person> {
 		this.name = name;
 	}
 
-	private Status[] status;
-	public Status[] getStatus() {
-		return status;
-	}
-	public void setStatus(Status[] status) {
-		this.status = status;
-	}
+//	private Status[] status;
+//	public Status[] getStatus() {
+//		return status;
+//	}
+//	public void setStatus(Status[] status) {
+//		this.status = status;
+//	}
 
     private Team team;
     @ManyToOne
