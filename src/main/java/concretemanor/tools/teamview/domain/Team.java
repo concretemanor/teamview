@@ -26,7 +26,7 @@ import org.hibernate.annotations.NaturalId;
  * Date: 11/16/12
  */
 @Entity
-@Table(name = "`TMV_Team`")
+@Table(name = "`tmv_team`")
 @NamedQueries(value = {
     @NamedQuery(name=Team.NAMED_QUERY_TEAM_BY_NAME, query="from Team where teamName=:teamName"),
     @NamedQuery(name=Team.NAMED_QUERY_ALL_TEAMS, query="from Team"),
@@ -45,9 +45,9 @@ public class Team implements Serializable {
     private Date createdDate;
 
     @Id
-    @Column(name = "`ID`")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "teamId")
-    @SequenceGenerator(name = "teamId", sequenceName = "`TMV_Team_ID_seq`", allocationSize = 1)
+    @Column(name = "`id`")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "teamid")
+    @SequenceGenerator(name = "teamid", sequenceName = "`tmv_team_id_seq`", allocationSize = 1)
     public Integer getId() {
         return id;
     }
@@ -56,7 +56,7 @@ public class Team implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "`CreatedDate`", insertable = true, updatable = false, columnDefinition = "timestamp default current_timestamp")
+    @Column(name = "`createddate`", insertable = true, updatable = false, columnDefinition = "timestamp default current_timestamp")
     @Generated(value = GenerationTime.INSERT)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getCreatedDate() {
@@ -67,7 +67,7 @@ public class Team implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @Column(name = "`TeamName`", nullable = false, unique = true)
+    @Column(name = "`teamname`", nullable = false, unique = true)
     public String getTeamName() {
         return teamName;
     }

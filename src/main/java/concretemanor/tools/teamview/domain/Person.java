@@ -20,7 +20,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 @Entity
-@Table(name = "`TMV_Person`")
+@Table(name = "`tmv_person`")
 @NamedQueries(value = {
         @NamedQuery(name=Person.NAMED_QUERY_PERSONS_BY_TEAM, query="from Person where team=:team")
 })
@@ -30,9 +30,9 @@ public class Person implements Comparable<Person> {
 
 	private Integer id;
     @Id
-    @Column(name = "`ID`")
+    @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GENERATOR")
-    @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_Person_ID_seq`", allocationSize = 1)
+    @SequenceGenerator(name = "GENERATOR", sequenceName = "`tmv_person_id_seq`", allocationSize = 1)
 	public Integer getId() {
 		return id;
 	}
@@ -41,7 +41,7 @@ public class Person implements Comparable<Person> {
 	}
 
     private Date createdDate;
-    @Column(name = "`CreatedDate`", insertable = true, updatable = false, columnDefinition = "timestamp default current_timestamp")
+    @Column(name = "`createddate`", insertable = true, updatable = false, columnDefinition = "timestamp default current_timestamp")
     @Generated(value = GenerationTime.INSERT)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getCreatedDate() {
@@ -53,7 +53,7 @@ public class Person implements Comparable<Person> {
     }
 
 	private String name;
-    @Column(name = "`Name`", nullable = false)
+    @Column(name = "`name`", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -61,17 +61,9 @@ public class Person implements Comparable<Person> {
 		this.name = name;
 	}
 
-//	private Status[] status;
-//	public Status[] getStatus() {
-//		return status;
-//	}
-//	public void setStatus(Status[] status) {
-//		this.status = status;
-//	}
-
     private Team team;
     @ManyToOne
-    @JoinColumn(name = "`TMV_TeamID`")
+    @JoinColumn(name = "`tmv_teamid`")
     public Team getTeam() {
         return team;
     }

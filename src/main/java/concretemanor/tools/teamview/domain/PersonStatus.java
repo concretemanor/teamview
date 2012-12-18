@@ -12,7 +12,7 @@ import org.hibernate.annotations.Type;
  * Date: 12/8/12
  */
 @Entity
-@Table(name = "`TMV_PersonStatus`")
+@Table(name = "`tmv_personstatus`")
 @NamedQueries(value = {
         @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE,
                 query="from PersonStatus where dateOfStatus>=:minDate and dateOfStatus<=:maxDate"),
@@ -27,9 +27,9 @@ public class PersonStatus implements Serializable {
 
     private Integer id;
     @Id
-    @Column(name = "`ID`")
+    @Column(name = "`id`")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "GENERATOR")
-    @SequenceGenerator(name = "GENERATOR", sequenceName = "`TMV_PersonStatus_ID_seq`", allocationSize = 1)
+    @SequenceGenerator(name = "GENERATOR", sequenceName = "`tmv_personstatus_id_seq`", allocationSize = 1)
     public Integer getId() {
         return id;
     }
@@ -39,7 +39,7 @@ public class PersonStatus implements Serializable {
 
     private Person person;
     @OneToOne
-    @JoinColumn(name = "`TMV_PersonID`", referencedColumnName = "`ID`")
+    @JoinColumn(name = "`tmv_personid`", referencedColumnName = "`id`")
     public Person getPerson() {
         return person;
     }
@@ -48,7 +48,7 @@ public class PersonStatus implements Serializable {
     }
 
     private Date dateOfStatus;
-    @Column(name = "`DateOfStatus`", insertable = true, updatable = true, columnDefinition = "timestamp")
+    @Column(name = "`dateofstatus`", insertable = true, updatable = true, columnDefinition = "timestamp")
     @Temporal(TemporalType.TIMESTAMP)
     public Date getDateOfStatus() {
         return dateOfStatus;
@@ -59,7 +59,7 @@ public class PersonStatus implements Serializable {
 
     private Status status;
     @Type(type = "concretemanor.tools.teamview.hibernate.StatusUserType")
-    @Column(name = "`Status`")
+    @Column(name = "`status`")
     public Status getStatus() {
         return status;
     }
