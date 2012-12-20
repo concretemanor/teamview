@@ -24,7 +24,7 @@
         <stripes:hidden id="refdate" name="date" value="${actionBean.date}" />	
 <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
         <stripes:hidden name="teamId" value="${actionBean.teamId}" />
-        <table>
+        <table cellpadding="2" cellspacing="2">
 	    <tr class="date-heading">
 	        <th></th>
 	        <th>Mon <fmt:formatDate value="${actionBean.monday}" pattern="MM/dd" /></th>
@@ -38,37 +38,42 @@
 		<td class='person-name'>${weekStatus.person.name}</td>
 		<td class='status' id="1${weekStatus.person.id}">
 		   <stripes:select class="statusmenu" name="status" value='${weekStatus.statuses[0]}'>
-		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
-		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
-		      <stripes:option value="VACATION">Vacation</stripes:option>
+		      <stripes:option value="IN_OFFICE">In</stripes:option>
+		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		      <stripes:option value="IN_TRAINING">Training</stripes:option>
+		      <stripes:option value="VACATION">Off</stripes:option>
 		   </stripes:select>
 		</td>
 		<td class='status' id="2${weekStatus.person.id}">
 		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[1]}'>
-		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
-		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
-		      <stripes:option value="VACATION">Vacation</stripes:option>
+		      <stripes:option value="IN_OFFICE">In</stripes:option>
+		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		      <stripes:option value="IN_TRAINING">Training</stripes:option>
+		      <stripes:option value="VACATION">Off</stripes:option>
 		   </stripes:select>
 		</td>
 		<td class='status' id="3${weekStatus.person.id}">
 		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[2]}'>
-		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
-		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
-		      <stripes:option value="VACATION">Vacation</stripes:option>
+		      <stripes:option value="IN_OFFICE">In</stripes:option>
+		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		      <stripes:option value="IN_TRAINING">Training</stripes:option>
+		      <stripes:option value="VACATION">Off</stripes:option>
 		   </stripes:select>
 		</td>
 		<td class='status' id="4${weekStatus.person.id}">
 		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[3]}'>
-		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
-		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
-		      <stripes:option value="VACATION">Vacation</stripes:option>
+		      <stripes:option value="IN_OFFICE">In</stripes:option>
+		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		      <stripes:option value="IN_TRAINING">Training</stripes:option>
+		      <stripes:option value="VACATION">Off</stripes:option>
 		   </stripes:select>
 		</td>
 		<td class='status' id="5${weekStatus.person.id}">
 		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[4]}'>
-		      <stripes:option value="IN_OFFICE">In Office</stripes:option>
-		      <stripes:option value="WORKING_FROM_HOME">Working From Home</stripes:option>
-		      <stripes:option value="VACATION">Vacation</stripes:option>
+		      <stripes:option value="IN_OFFICE">In</stripes:option>
+		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		      <stripes:option value="IN_TRAINING">Training</stripes:option>
+		      <stripes:option value="VACATION">Off</stripes:option>
 		   </stripes:select>
 		</td>
 	      </tr>
