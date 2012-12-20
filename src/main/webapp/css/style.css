@@ -20,14 +20,19 @@ td.person-name {
 select {
     border-width: 0;
 }
-option[value='IN_OFFICE'] {
+select[value='IN_OFFICE'] {
     background-color: white;
 }
-option[value='WORKING_FROM_HOME'] {
+select[value='WORKING_FROM_HOME'] {
     background-color: yellow;
+    color: yellow;
 }
-option[value='VACATION'] {
+select[value='VACATION'] {
     background-color: red;
+    color: red;
+}
+select[value='TRAINING'] {
+    background-color: white;
     color: white;
 }
 h1 {

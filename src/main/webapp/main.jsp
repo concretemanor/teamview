@@ -33,49 +33,19 @@
 	        <th>Thu <fmt:formatDate value="${actionBean.thursday}" pattern="MM/dd" /></th>
 	        <th>Fri <fmt:formatDate value="${actionBean.friday}" pattern="MM/dd" /></th>
 	    </tr>
-	    <c:forEach items="${actionBean.weekStatuses}" var="weekStatus" varStatus="loop">
+	    <c:forEach items="${actionBean.weekStatuses}" var="weekStatus" varStatus="weekLoop">
 	      <tr>
 		<td class='person-name'>${weekStatus.person.name}</td>
-		<td class='status' id="1${weekStatus.person.id}">
-		   <stripes:select class="statusmenu" name="status" value='${weekStatus.statuses[0]}'>
-		      <stripes:option value="IN_OFFICE">In</stripes:option>
-		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
-		      <stripes:option value="IN_TRAINING">Training</stripes:option>
-		      <stripes:option value="VACATION">Off</stripes:option>
-		   </stripes:select>
-		</td>
-		<td class='status' id="2${weekStatus.person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[1]}'>
-		      <stripes:option value="IN_OFFICE">In</stripes:option>
-		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
-		      <stripes:option value="IN_TRAINING">Training</stripes:option>
-		      <stripes:option value="VACATION">Off</stripes:option>
-		   </stripes:select>
-		</td>
-		<td class='status' id="3${weekStatus.person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[2]}'>
-		      <stripes:option value="IN_OFFICE">In</stripes:option>
-		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
-		      <stripes:option value="IN_TRAINING">Training</stripes:option>
-		      <stripes:option value="VACATION">Off</stripes:option>
-		   </stripes:select>
-		</td>
-		<td class='status' id="4${weekStatus.person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[3]}'>
-		      <stripes:option value="IN_OFFICE">In</stripes:option>
-		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
-		      <stripes:option value="IN_TRAINING">Training</stripes:option>
-		      <stripes:option value="VACATION">Off</stripes:option>
-		   </stripes:select>
-		</td>
-		<td class='status' id="5${weekStatus.person.id}">
-		   <stripes:select class="statusmenu" name="status"  value='${weekStatus.statuses[4]}'>
-		      <stripes:option value="IN_OFFICE">In</stripes:option>
-		      <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
-		      <stripes:option value="IN_TRAINING">Training</stripes:option>
-		      <stripes:option value="VACATION">Off</stripes:option>
-		   </stripes:select>
-		</td>
+		<c:forEach items="${weekStatus.statuses}" var="status" varStatus="statusLoop">
+		   <td class='status' id="${statusLoop.count}${weekStatus.person.id}">
+		     <stripes:select class="statusmenu" name="status" value='${status}'>
+		       <stripes:option value="IN_OFFICE">In</stripes:option>
+		       <stripes:option value="WORKING_REMOTELY">Remote</stripes:option>
+		       <stripes:option value="IN_TRAINING">Training</stripes:option>
+		       <stripes:option value="VACATION">Off</stripes:option>
+		     </stripes:select>
+		   </td>
+                </c:forEach>
 	      </tr>
             </c:forEach>
         </table>

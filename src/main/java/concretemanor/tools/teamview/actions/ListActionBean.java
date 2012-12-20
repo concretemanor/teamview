@@ -48,8 +48,11 @@ public class ListActionBean implements ActionBean {
 		return service;
 	}
 	
-	private Integer teamId = 1;
+	private Integer teamId = null;
 	public Integer getTeamId() {
+	    if (teamId == null) {
+			teamId = service.getAllTeams().get(0).getId();
+		}
 		return teamId;
 	}
 	public void setTeamId(Integer teamId) {
