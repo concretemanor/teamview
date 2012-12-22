@@ -1,27 +1,31 @@
 package concretemanor.tools.teamview.actions;
 
+import java.io.StringReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.StreamingResolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.util.Log;
 
-import org.springframework.transaction.annotation.Transactional;
+import com.google.gson.Gson;
 
 import concretemanor.tools.teamview.domain.Status;
 import concretemanor.tools.teamview.domain.Team;
 import concretemanor.tools.teamview.service.IService;
 import concretemanor.tools.teamview.service.WeekStatus;
-import concretemanor.tools.teamview.views.PersonManager;
-import concretemanor.tools.teamview.views.PersonStatusManager;
 
 @UrlBinding("/list.action")
 public class ListActionBean implements ActionBean {
@@ -31,8 +35,6 @@ public class ListActionBean implements ActionBean {
 
 	@SpringBean
 	private IService service;
-	private PersonManager pm = new PersonManager();
-	private PersonStatusManager psm = new PersonStatusManager();
 	
 	@Override
 	public void setContext(ActionBeanContext context) {
@@ -88,26 +90,6 @@ public class ListActionBean implements ActionBean {
 		return gCal.getTime();
 	}
 
-	public Date getMonday() {
-		return dateFrom(1);
-	}
-
-	public Date getTuesday() {
-		return dateFrom(2);
-	}
-
-	public Date getWednesday() {
-		return dateFrom(3);
-	}
-
-	public Date getThursday() {
-		return dateFrom(4);
-	}
-
-	public Date getFriday() {
-		return dateFrom(5);
-	}
-
 	public Date getLastDate() {
 		return dateFrom(6);
 	}
@@ -130,9 +112,14 @@ public class ListActionBean implements ActionBean {
 		this.cellValue = cellValue;
 	}
 
-	private String cellId;
-	public void setCellId(String cellId) {
-		this.cellId = cellId;
+	private Integer personId;
+	public void setPersonId(Integer personId) {
+		this.personId = personId;
+	}
+	
+	public Integer dayIndex;
+	public void setDayIndex(Integer dayIndex) {
+		this.dayIndex = dayIndex;
 	}
 
 	private Resolution adjustDate(int delta) {
@@ -162,6 +149,9 @@ public class ListActionBean implements ActionBean {
 		else if ("changeTeam".equals(event)) {
 			return changeTeam();
 		}
+		else if ("loadData".equals(event)) {
+			return loadData();
+		}
 
 		loggie.debug("in view");
 		GregorianCalendar gCal = new GregorianCalendar();
@@ -186,8 +176,6 @@ public class ListActionBean implements ActionBean {
 	}
 
 	public Resolution changeStatus() {
-		int personId = Integer.valueOf(cellId.substring(1));
-		int dayIndex = Integer.valueOf(cellId.substring(0,1));
 		Date date = dateFrom(dayIndex);
 		loggie.debug("update "+personId+" "+dayIndex+" "+date+" "+cellValue);
 		service.updateStatus(personId,date,cellValue);
@@ -198,5 +186,59 @@ public class ListActionBean implements ActionBean {
 	public Resolution changeTeam() {
 		loggie.debug("team changed to "+teamId);
 		return refresh();
+	}
+	
+	public Resolution loadData() {
+		loggie.debug("enter loadData");
+		
+		final Map<String,String> choices = new HashMap<String,String>();
+		choices.put("IN_OFFICE", "In");
+		choices.put("WORKING_REMOTELY", "Remote");
+		choices.put("IN_TRAINING", "Training");
+		choices.put("VACATION", "Off");
+		
+		final List<Map<String,Object>> metadata = new ArrayList<Map<String,Object>>();
+		Map<String,Object> h = new HashMap<String,Object>();
+		h.put("name","name");
+		h.put("datatype","string");
+		h.put("editable",Boolean.FALSE);
+		metadata.add(h);
+		
+		final SimpleDateFormat sdf = new SimpleDateFormat("E MM/dd");
+		for (int i=1; i<=5; i++) {
+			final int j=i; // stupid hack -- what's the right way to do this?
+			h = new HashMap<String,Object>();
+		    h.put("name","d"+j);
+			h.put("label",sdf.format(dateFrom(j)));
+			h.put("datatype","string");
+			h.put("editable",Boolean.TRUE);
+			h.put("values",choices);
+			metadata.add(h);
+		}
+		
+		List<WeekStatus> statuses = getWeekStatuses();
+		final List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
+		for (final WeekStatus status : statuses) {
+			Map<String,Object> row = new HashMap<String,Object>();
+			Map<String,Object> values = new HashMap<String,Object>();
+			row.put("id",status.getPerson().getId());
+			values.put("name",status.getPerson().getName());
+			for (int i=0; i<5; i++) {
+				values.put("d"+(i+1),status.getStatuses()[i]);
+			}
+			row.put("values", values);
+			data.add(row);
+		}
+		
+		Gson gson = new Gson();
+		gson = new Gson();
+		
+		Map<String,Object> model = new HashMap<String,Object>();
+		model.put("metadata",metadata);
+		model.put("data",data);
+		
+		String json = gson.toJson(model);
+		
+		return new StreamingResolution("text",new StringReader(json));
 	}
 }
