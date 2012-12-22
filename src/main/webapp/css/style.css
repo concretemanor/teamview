@@ -61,14 +61,6 @@ body {
 select {
     border-width: select;
 }
-td[value='Remote'] {
-    background-color: yellow;
-    color: yellow;
-}
-select[value='Out'] {
-    background-color: red;
-    color: red;
-}
 
 h1 {
     text-align: center;
