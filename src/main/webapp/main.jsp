@@ -15,7 +15,7 @@
             window.onload = function() {
                 editableGrid = new EditableGrid("DemoGridAttach"); 
 
-		editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "testgrid"); };
+		editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "statustable"); };
                 editableGrid.loadJSON("${pageContext.request.contextPath}/list.action?event=loadData" +
 		                      "&teamId=" + $(".teammenu").val() +
 				      "&date=" + $("#refDate").val());

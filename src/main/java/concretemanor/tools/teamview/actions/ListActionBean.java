@@ -202,6 +202,7 @@ public class ListActionBean implements ActionBean {
 		h.put("name","name");
 		h.put("datatype","string");
 		h.put("editable",Boolean.FALSE);
+		h.put("label","");
 		metadata.add(h);
 		
 		final SimpleDateFormat sdf = new SimpleDateFormat("E MM/dd");
