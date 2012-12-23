@@ -38,7 +38,7 @@
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <stripes:form beanclass="concretemanor.tools.teamview.actions.ChangeTeamActionBean">
+    <stripes:form action="/changeteam.action">
       <stripes:label for="team"/>: <stripes:select class='teammenu' name='team' value="${actionBean.teamId}">
         <c:forEach items="${actionBean.allTeams}" var="team" varStatus="loop">
           <stripes:option value="${team.id}">${team.teamName}</stripes:option>
@@ -46,14 +46,14 @@
       </stripes:select>
     </stripes:form>
     <h1>WHERE WILL YOU BE?</h1>
-    <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
+    <stripes:form action="/list.action">
       <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
       <stripes:hidden id="refDate" name="date" />
       <stripes:hidden id="teamId2" name="teamId" value="${actionBean.teamId}" />
     </stripes:form>
     <div id='tablecontent'></div>
 
-    <stripes:form id="changeForm" beanclass="concretemanor.tools.teamview.actions.ChangeTeamActionBean">
+    <stripes:form id="changeForm" action="/changeteam.action">
       <stripes:hidden id="teamId" name="teamId" />
       <stripes:hidden id="teamDate" name="date" />
     </stripes:form>

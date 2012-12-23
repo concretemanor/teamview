@@ -13,6 +13,7 @@ public class ActionBeanBase implements ActionBean {
 
 	private ActionBeanContext context;
 	private Date date;
+	
 	@SpringBean
 	private IService service;
 	
