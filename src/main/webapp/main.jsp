@@ -6,35 +6,11 @@
       <title>Team Availability</title>
       <script type="text/javascript"
               src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
-      <script>
-         $.getScript("${pageContext.request.contextPath}/js/teamview.js", function(jqxhr,settings,exception){});
-      </script>
       <script type="text/javascript" 
                src="${pageContext.request.contextPath}/js/editablegrid-2.0.1.js"></script>
       <script>
-            window.onload = function() {
-                editableGrid = new EditableGrid("DemoGridAttach"); 
-
-                editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "statustable"); };
-                editableGrid.loadJSON("${pageContext.request.contextPath}/load.action?" +
-                                      "teamId=" + $(".teammenu").val() +
-                                      "&date=" + $("#refDate").val());
-
-                editableGrid.modelChanged = function(rowIndex, columnIndex, oldValue, newValue) {
-                    var val = 
-                       $('#htmlgrid')
-                          .find('tr:nth-child('+rowIndex+') td:nth-child('+columnIndex+')')
-                          .attr('id');
-                    $.ajax({
-                       type: "POST",
-                       url: "update.action",
-                       data: { date: $('#refDate').val(),
-                               dayIndex: columnIndex,
-                               cellValue: newValue,
-                               personId: editableGrid.getRowId(rowIndex)}});
-                }
-            } 
-        </script>
+         $.getScript("${pageContext.request.contextPath}/js/teamview.js", function(jqxhr,settings,exception){});
+      </script>
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
