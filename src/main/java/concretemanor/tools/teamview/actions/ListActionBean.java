@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.stripes.action.ActionBean;
-import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -22,29 +21,16 @@ import net.sourceforge.stripes.util.Log;
 
 import com.google.gson.Gson;
 
-import concretemanor.tools.teamview.domain.Status;
 import concretemanor.tools.teamview.domain.Team;
 import concretemanor.tools.teamview.service.IService;
 import concretemanor.tools.teamview.service.WeekStatus;
 
 @UrlBinding("/list.action")
-public class ListActionBean implements ActionBean {
+public class ListActionBean extends ActionBeanBase implements ActionBean {
 	private static Log loggie = Log.getInstance(ListActionBean.class);
-
-	private ActionBeanContext context;
 
 	@SpringBean
 	private IService service;
-	
-	@Override
-	public void setContext(ActionBeanContext context) {
-		this.context = context;
-	}
-
-	@Override
-	public ActionBeanContext getContext() {
-		return context;
-	}
 	
 	protected IService getService() {
 		return service;
@@ -62,34 +48,6 @@ public class ListActionBean implements ActionBean {
 		this.teamId = teamId;
 	}
 
-	private Date date;
-
-	public Date getDate() {
-		return date;
-	}
-
-	private Date toMidnight(Date d) {
-		GregorianCalendar gCal = new GregorianCalendar();
-		gCal.setTime(d);
-		gCal.set(Calendar.HOUR_OF_DAY,0);
-		gCal.set(Calendar.MINUTE,0);
-		gCal.set(Calendar.SECOND,0);
-		gCal.set(Calendar.MILLISECOND,0);
-
-		return gCal.getTime();
-	}
-		
-	public void setDate(Date date) {
-		this.date = toMidnight(date);
-	}
-
-	private Date dateFrom(int delta) {
-		GregorianCalendar gCal = new GregorianCalendar();
-		gCal.setTime(getDate());
-		gCal.add(Calendar.DAY_OF_YEAR, delta);
-		return gCal.getTime();
-	}
-
 	public Date getLastDate() {
 		return dateFrom(6);
 	}
@@ -99,27 +57,12 @@ public class ListActionBean implements ActionBean {
 		return result;
 	}
 	
-	public List<WeekStatus> getWeekStatuses() {
+	private List<WeekStatus> getWeekStatuses() {
 		Team team = service.getTeamById(teamId);
-		List<WeekStatus> result = service.getByTeamForWeek(team,date);
+		List<WeekStatus> result = service.getByTeamForWeek(team,getDate());
 		loggie.debug("getWeekStatuses returns "+result);
 
 		return result;
-	}
-
-	private Status cellValue;
-	public void setCellValue(Status cellValue) {
-		this.cellValue = cellValue;
-	}
-
-	private Integer personId;
-	public void setPersonId(Integer personId) {
-		this.personId = personId;
-	}
-	
-	public Integer dayIndex;
-	public void setDayIndex(Integer dayIndex) {
-		this.dayIndex = dayIndex;
 	}
 
 	private Resolution adjustDate(int delta) {
@@ -143,10 +86,7 @@ public class ListActionBean implements ActionBean {
 
 	@DefaultHandler
 	public Resolution view() {
-		if ("changeStatus".equals(event)) { // TBD remove this hack
-			return changeStatus();
-		}
-		else if ("changeTeam".equals(event)) {
+		if ("changeTeam".equals(event)) {
 			return changeTeam();
 		}
 		else if ("loadData".equals(event)) {
@@ -175,14 +115,6 @@ public class ListActionBean implements ActionBean {
 		this.event = event;
 	}
 
-	public Resolution changeStatus() {
-		Date date = dateFrom(dayIndex);
-		loggie.debug("update "+personId+" "+dayIndex+" "+date+" "+cellValue);
-		service.updateStatus(personId,date,cellValue);
-
-		return refresh();
-	}
-	
 	public Resolution changeTeam() {
 		loggie.debug("team changed to "+teamId);
 		return refresh();

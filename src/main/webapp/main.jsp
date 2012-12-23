@@ -15,23 +15,23 @@
             window.onload = function() {
                 editableGrid = new EditableGrid("DemoGridAttach"); 
 
-		editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "statustable"); };
+                editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "statustable"); };
                 editableGrid.loadJSON("${pageContext.request.contextPath}/list.action?event=loadData" +
-		                      "&teamId=" + $(".teammenu").val() +
-				      "&date=" + $("#refDate").val());
+                                      "&teamId=" + $(".teammenu").val() +
+                                      "&date=" + $("#refDate").val());
 
                 editableGrid.modelChanged = function(rowIndex, columnIndex, oldValue, newValue) {
                     var val = 
                        $('#htmlgrid')
                           .find('tr:nth-child('+rowIndex+') td:nth-child('+columnIndex+')')
                           .attr('id');
-                    $('#personId').val(editableGrid.getRowId(rowIndex));
-		    $('#dayIndex').val(columnIndex);
-                    $('#cellValue').val(newValue);
-                    $('#cellDate').val($('#refDate').val());
-                    $('#cellTeamId').val($('.teammenu').val());
-                    $('#event').val('changeStatus');
-                    $('#changeForm').submit();
+                    $.ajax({
+                       type: "POST",
+                       url: "update.action",
+                       data: { date: $('#refDate').val(),
+                               dayIndex: columnIndex,
+                               cellValue: newValue,
+                               personId: editableGrid.getRowId(rowIndex)}});
                 }
             } 
         </script>
@@ -48,16 +48,12 @@
     <h1>WHERE WILL YOU BE?</h1>
     <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
       <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
-      <stripes:hidden id="teamId" name="teamId" />
       <stripes:hidden id="refDate" name="date" />
+      <stripes:hidden id="teamId2" name="teamId" value="${actionBean.teamId}" />
     </stripes:form>
     <div id='tablecontent'></div>
 
     <stripes:form id="changeForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
-      <stripes:hidden id="personId" name="personId" />
-      <stripes:hidden id="dayIndex" name="dayIndex" />
-      <stripes:hidden id="cellValue" name="cellValue" />
-      <stripes:hidden id="cellDate" name="date" />
       <stripes:hidden id="event" name="event" />
       <stripes:hidden id="teamId" name="teamId" />
       <stripes:hidden id="teamDate" name="date" />
