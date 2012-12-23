@@ -6,12 +6,16 @@ import java.util.GregorianCalendar;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.integration.spring.SpringBean;
+import concretemanor.tools.teamview.service.IService;
 
 public class ActionBeanBase implements ActionBean {
 
 	private ActionBeanContext context;
 	private Date date;
-
+	@SpringBean
+	private IService service;
+	
 	public ActionBeanBase() {
 		super();
 	}
@@ -24,6 +28,10 @@ public class ActionBeanBase implements ActionBean {
 	@Override
 	public ActionBeanContext getContext() {
 		return context;
+	}
+
+	protected IService getService() {
+		return service;
 	}
 
 	protected Date toMidnight(Date d) {

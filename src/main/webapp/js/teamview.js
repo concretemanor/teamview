@@ -3,6 +3,5 @@ $('.teammenu').change(function() {
    var element = $(this).children().filter(':selected');
    $('#teamId').val(element.val());
    $('#teamDate').val($('#refDate').val());
-   $('#event').val('changeTeam');
    $('#changeForm').submit();
 });

@@ -16,8 +16,8 @@
                 editableGrid = new EditableGrid("DemoGridAttach"); 
 
                 editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "statustable"); };
-                editableGrid.loadJSON("${pageContext.request.contextPath}/list.action?event=loadData" +
-                                      "&teamId=" + $(".teammenu").val() +
+                editableGrid.loadJSON("${pageContext.request.contextPath}/load.action?" +
+                                      "teamId=" + $(".teammenu").val() +
                                       "&date=" + $("#refDate").val());
 
                 editableGrid.modelChanged = function(rowIndex, columnIndex, oldValue, newValue) {
@@ -38,7 +38,7 @@
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <stripes:form beanclass="concretemanor.tools.teamview.actions.ListActionBean">
+    <stripes:form beanclass="concretemanor.tools.teamview.actions.ChangeTeamActionBean">
       <stripes:label for="team"/>: <stripes:select class='teammenu' name='team' value="${actionBean.teamId}">
         <c:forEach items="${actionBean.allTeams}" var="team" varStatus="loop">
           <stripes:option value="${team.id}">${team.teamName}</stripes:option>
@@ -53,8 +53,7 @@
     </stripes:form>
     <div id='tablecontent'></div>
 
-    <stripes:form id="changeForm" beanclass="concretemanor.tools.teamview.actions.ListActionBean">
-      <stripes:hidden id="event" name="event" />
+    <stripes:form id="changeForm" beanclass="concretemanor.tools.teamview.actions.ChangeTeamActionBean">
       <stripes:hidden id="teamId" name="teamId" />
       <stripes:hidden id="teamDate" name="date" />
     </stripes:form>
