@@ -16,14 +16,14 @@ import org.hibernate.annotations.Type;
 @NamedQueries(value = {
         @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE,
                 query="from PersonStatus where dateOfStatus>=:minDate and dateOfStatus<=:maxDate"),
-        @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE,
-                query="from PersonStatus where person.team=:team and dateOfStatus>=:minDate and dateOfStatus<=:maxDate")
+        @NamedQuery(name=PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_ID_AND_DATE_RANGE,
+                query="select distinct ps from PersonStatus ps join ps.person.teams t where t.id=:teamId and ps.dateOfStatus>=:minDate and ps.dateOfStatus<=:maxDate")
 })
 public class PersonStatus implements Serializable {
 
     public final static String NAMED_QUERY_PERSON_STATUS_BY_DATE_RANGE = "query.personStatus.by.dateRange";
 
-    public final static String NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE = "query.personStatus.by.team.and.dateRange";
+    public final static String NAMED_QUERY_PERSON_STATUS_BY_TEAM_ID_AND_DATE_RANGE = "query.personStatus.by.team.and.dateRange";
 
     private Integer id;
     @Id

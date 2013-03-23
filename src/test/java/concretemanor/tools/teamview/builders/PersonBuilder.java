@@ -26,7 +26,7 @@ public class PersonBuilder {
 
     public PersonBuilder withTeam(Team team) {
         if ( person != null ) {
-            person.setTeam(team);
+            person.addTeam(team);
             return this;
         } else {
             throw new IllegalArgumentException("Must call withName() method first");

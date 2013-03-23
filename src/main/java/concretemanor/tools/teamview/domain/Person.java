@@ -1,32 +1,24 @@
 package concretemanor.tools.teamview.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
+import org.apache.commons.collections.Unmodifiable;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 @Entity
 @Table(name = "`tmv_person`")
 @NamedQueries(value = {
-        @NamedQuery(name=Person.NAMED_QUERY_PERSONS_BY_TEAM, query="from Person where team=:team")
+        @NamedQuery(name=Person.NAMED_QUERY_PERSONS_BY_TEAM_ID, query="select distinct p from Person p join p.teams t where t.id = :teamId")
 })
 public class Person implements Comparable<Person> {
 
-    public final static String NAMED_QUERY_PERSONS_BY_TEAM = "query.persons.by.team";
+    public final static String NAMED_QUERY_PERSONS_BY_TEAM_ID = "query.persons.by.team.id";
 
 	private Integer id;
     @Id
@@ -61,14 +53,25 @@ public class Person implements Comparable<Person> {
 		this.name = name;
 	}
 
-    private Team team;
-    @ManyToOne
-    @JoinColumn(name = "`tmv_teamid`")
-    public Team getTeam() {
-        return team;
+    private List<Team> teams = new ArrayList<Team>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "`tmv_xref_person_team`", joinColumns = {
+            @JoinColumn(name = "tmv_personid", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "tmv_teamid",
+                    nullable = false, updatable = false) })
+    public List<Team> getTeams() {
+        return Collections.unmodifiableList(teams);
     }
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
+
+    public void removeTeam(Team team) {
+        teams.remove(team);
     }
 
 	public int compareTo(Person o) {

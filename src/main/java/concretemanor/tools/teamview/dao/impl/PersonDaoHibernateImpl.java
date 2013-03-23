@@ -1,5 +1,6 @@
 package concretemanor.tools.teamview.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -32,8 +33,11 @@ public class PersonDaoHibernateImpl implements PersonDao {
     }
 
     public List<Person> getByTeam(Team team) {
-        final Query query = sessionFactory.getCurrentSession().getNamedQuery(Person.NAMED_QUERY_PERSONS_BY_TEAM);
-        query.setParameter("team", team);
+        if ( team == null ) {
+            throw new IllegalArgumentException("getByTeam() must be called with a non-null Team object");
+        }
+        final Query query = sessionFactory.getCurrentSession().getNamedQuery(Person.NAMED_QUERY_PERSONS_BY_TEAM_ID);
+        query.setParameter("teamId", team.getId());
         return query.list();
     }
 

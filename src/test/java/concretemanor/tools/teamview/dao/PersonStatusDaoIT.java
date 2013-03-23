@@ -2,6 +2,7 @@ package concretemanor.tools.teamview.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -73,7 +74,6 @@ public class PersonStatusDaoIT {
         PersonStatus personStatus = personStatusList.get(0);
         assertNotNull("Person in PersonStatus should not be null", personStatus.getPerson());
         assertEquals("Person.name in PersonStatus", johnDoeName, personStatus.getPerson().getName());
-        assertEquals("Person.team in PersonStatus", ateam, personStatus.getPerson().getTeam());
-        assertEquals("Status in PersonStatus", Status.VACATION, personStatus.getStatus());
+        assertTrue("Person.team in PersonStatus", personStatus.getPerson().getTeams().contains(ateam));        assertEquals("Status in PersonStatus", Status.VACATION, personStatus.getStatus());
     }
 }

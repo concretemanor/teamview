@@ -37,8 +37,8 @@ public class PersonStatusDaoHibernateImpl implements PersonStatusDao {
 
     @Override
     public List<PersonStatus> getByTeamAndDateRange(Team team, Date minDate, Date maxDate) {
-        final Query query = sessionFactory.getCurrentSession().getNamedQuery(PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_AND_DATE_RANGE);
-        query.setParameter("team", team);
+        final Query query = sessionFactory.getCurrentSession().getNamedQuery(PersonStatus.NAMED_QUERY_PERSON_STATUS_BY_TEAM_ID_AND_DATE_RANGE);
+        query.setParameter("teamId", team.getId());
         query.setParameter("minDate", minDate);
         query.setParameter("maxDate", maxDate);
         return query.list();

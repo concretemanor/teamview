@@ -70,4 +70,35 @@ public class PersonDaoIT {
         assertNotNull("B Team Persons is not null", bteamPersons);
         assertEquals("B Team Persons size", 1, bteamPersons.size());
     }
+
+    @Transactional
+    @Test
+    public void onePersonWithMultipleTeams() throws Exception {
+        String aTeamName = "The A Team";
+        Team ateam = TeamBuilder.newBuilder().withName(aTeamName).create();
+        teamDao.save(ateam);
+
+        String bTeamName = "The B Team";
+        Team bteam = TeamBuilder.newBuilder().withName(bTeamName).create();
+        teamDao.save(bteam);
+
+        String johnDoeName = "John Doe";
+        Person johnDoe = PersonBuilder.newBuilder().withName(johnDoeName).withTeam(ateam).create();
+        johnDoe.addTeam(bteam);
+        personDao.save(johnDoe);
+
+        String somebodyName = "Somebody";
+        Person somebody = PersonBuilder.newBuilder().withName(somebodyName).withTeam(bteam).create();
+        personDao.save(somebody);
+
+        List<Person> ateamPersons = personDao.getByTeam(ateam);
+        assertNotNull("A Team Persons is not null", ateamPersons);
+        assertEquals("A Team Persons size", 1, ateamPersons.size());
+        Person onePerson = ateamPersons.get(0);
+        assertEquals("A Team only member is John Doe", johnDoe, onePerson);
+
+        List<Person> bteamPersons = personDao.getByTeam(bteam);
+        assertNotNull("B Team Persons is not null", bteamPersons);
+        assertEquals("B Team Persons size", 2, bteamPersons.size());
+    }
 }
