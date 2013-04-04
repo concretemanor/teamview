@@ -1,5 +1,7 @@
 package concretemanor.tools.teamview.actions;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,11 @@ public class StatusContextActionBean extends ActionBeanBase {
     private static Log log = Log.getInstance(StatusContextActionBean.class);
 
     protected Integer teamId = null;
+
+    private static final Comparator BY_NAME  = new Comparator<Team>() {
+	public int compare(Team t1, Team t2) {
+	    return t1.getTeamName().compareTo(t2.getTeamName());
+	}};
 
     public StatusContextActionBean() {
 	super();
@@ -32,6 +39,8 @@ public class StatusContextActionBean extends ActionBeanBase {
 
     public List<Team> getAllTeams() {
 	List<Team> result = getService().getAllTeams();
+	Collections.sort(result,BY_NAME);
+		
 	return result;
     }
 
