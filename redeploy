@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WEBAPPS=/var/lib/tomcat7/webapps
-NAME=teamview-1.0.0-SNAPSHOT
+NAME=teamview-2.0.0-SNAPSHOT
 
 /etc/init.d/tomcat7 stop
 rm -rf $WEBAPPS/teamview $WEBAPPS/teamview.war
