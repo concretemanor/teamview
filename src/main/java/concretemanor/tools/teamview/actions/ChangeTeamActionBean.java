@@ -2,6 +2,7 @@ package concretemanor.tools.teamview.actions;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.util.Log;
@@ -14,6 +15,6 @@ public class ChangeTeamActionBean extends StatusContextActionBean implements Act
 	@DefaultHandler
 	public Resolution changeTeam() {
 		loggie.debug("team changed to "+teamId);
-		return refresh();
+		return new ForwardResolution("/main.jsp");
 	}
 }

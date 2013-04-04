@@ -9,7 +9,7 @@ import net.sourceforge.stripes.util.Log;
 import concretemanor.tools.teamview.domain.Team;
 
 public class StatusContextActionBean extends ActionBeanBase {
-    private static Log loggie = Log.getInstance(StatusContextActionBean.class);
+    private static Log log = Log.getInstance(StatusContextActionBean.class);
 
     protected Integer teamId = null;
 
@@ -18,6 +18,7 @@ public class StatusContextActionBean extends ActionBeanBase {
     }
 
     public Integer getTeamId() {
+	log.debug("getTeamId: teamId is null");
 	if (teamId == null) {
 	    teamId = getService().getAllTeams().get(0).getId();
 	}
@@ -25,7 +26,7 @@ public class StatusContextActionBean extends ActionBeanBase {
     }
 
     public void setTeamId(Integer teamId) {
-	loggie.debug("setTeam: teamId="+teamId);
+	log.debug("setTeam: teamId="+teamId);
 	this.teamId = teamId;
     }
 
