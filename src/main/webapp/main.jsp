@@ -8,8 +8,8 @@
               src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
       <script type="text/javascript" 
                src="${pageContext.request.contextPath}/js/editablegrid-2.0.1.js"></script>
-      <script>
-         $.getScript("${pageContext.request.contextPath}/js/teamview.js", function(jqxhr,settings,exception){});
+      <script type="text/javascript"
+              src="${pageContext.request.contextPath}/js/teamview.js"></script>
       </script>
       <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
@@ -22,7 +22,7 @@
       </stripes:select>
     </stripes:form>
     <h1>WHERE WILL YOU BE?</h1>
-    <stripes:form action="/list.action">
+    <stripes:form action="/fulllist.action">
       <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
       <stripes:hidden id="refDate" name="date" />
       <stripes:hidden id="teamId2" name="teamId" value="${actionBean.teamId}" />
@@ -33,5 +33,16 @@
       <stripes:hidden id="teamId" name="teamId" />
       <stripes:hidden id="teamDate" name="date" />
     </stripes:form>
+
+    <script>
+        $('.teammenu').change(function() {
+            var element = $(this).children().filter(':selected');
+            $('#teamId').val(element.val());
+            $('#teamDate').val($('#refDate').val());
+            $('#changeForm').submit();
+        });
+        var sg = new StatusGrid("tablecontent",jQuery);
+	sg.load($("#teamId2").val(), $("#refDate").val());
+    </script>
   </body>
 </html>
