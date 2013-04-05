@@ -7,7 +7,7 @@
     <artifactId>teamview</artifactId>
     <packaging>war</packaging>
     <version>2.0.0-SNAPSHOT</version>
-    <name>Team View</name>
+    <name>TeamView</name>
     <url>http://www.rackspace.com</url>
 
     <pluginRepositories>
@@ -251,6 +251,14 @@
                 </executions>
             </plugin>
         </plugins>
+	
+	<!-- to resolve version number reference in StripesResources.properties -->
+	<resources>
+	  <resource>
+	    <directory>src/main/resources</directory>
+	    <filtering>true</filtering>
+	  </resource>
+	</resources>
     </build>
 
     <distributionManagement>

@@ -23,6 +23,14 @@
     <param-value>/WEB-INF/config/web-application-config.xml</param-value>
   </context-param>
 
+  <!-- fmt:message won't work unless you do this -->
+  <context-param>
+    <param-name>
+      javax.servlet.jsp.jstl.fmt.localizationContext
+    </param-name>
+    <param-value>StripesResources</param-value>
+  </context-param>
+
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!--              Configuration of the Stripes Filter.                   -->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -57,6 +65,11 @@
       	net.sourceforge.stripes.integration.spring.SpringInterceptor,
 	net.sourceforge.stripes.controller.BeforeAfterMethodInterceptor
       </param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>ActionBeanContext.Class</param-name>
+      <param-value>concretemanor.tools.teamview.actions.TeamViewActionBeanContext</param-value>
     </init-param>
   </filter>
 

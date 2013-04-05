@@ -44,5 +44,6 @@
         var sg = new StatusGrid("tablecontent",jQuery);
 	sg.load($("#teamId2").val(), $("#refDate").val());
     </script>
+    <div class="about"><a class="about" href="https://github.com/concretemanor/teamview/wiki">Powered By <fmt:message key="teamview.name"/> <fmt:message key="teamview.version"/></a></div>
   </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.util.Log;
@@ -12,6 +13,7 @@ import concretemanor.tools.teamview.domain.Team;
 
 public class StatusContextActionBean extends ActionBeanBase {
     private static Log log = Log.getInstance(StatusContextActionBean.class);
+    private TeamViewActionBeanContext context;
 
     protected Integer teamId = null;
 
@@ -20,8 +22,17 @@ public class StatusContextActionBean extends ActionBeanBase {
 	    return t1.getTeamName().compareTo(t2.getTeamName());
 	}};
 
+    //TODO: do I really need to define this constructor?
     public StatusContextActionBean() {
 	super();
+    }
+
+    public TeamViewActionBeanContext getContext() {
+	return context;
+    }
+
+    public void setContext(ActionBeanContext context) {
+	this.context = (TeamViewActionBeanContext) context;
     }
 
     public Integer getTeamId() {
