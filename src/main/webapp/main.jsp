@@ -22,7 +22,7 @@
       </stripes:select>
     </stripes:form>
     <h1>WHERE WILL YOU BE?</h1>
-    <stripes:form action="/fulllist.action">
+    <stripes:form action="/list.action">
       <div class='date-nav'><stripes:submit name="view" value="Today"/><stripes:submit name="back" value="<" /><fmt:formatDate value="${actionBean.date}" dateStyle="short" /> - <fmt:formatDate value="${actionBean.lastDate}" dateStyle="short" /><stripes:submit name="forward" value=">" /></div>
       <stripes:hidden id="refDate" name="date" />
       <stripes:hidden id="teamId2" name="teamId" value="${actionBean.teamId}" />
