@@ -5,20 +5,38 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.apache.commons.collections.Unmodifiable;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "`tmv_person`")
 @NamedQueries(value = {
-        @NamedQuery(name=Person.NAMED_QUERY_PERSONS_BY_TEAM_ID, query="select distinct p from Person p join p.teams t where t.id = :teamId")
+        @NamedQuery(name=Person.NAMED_QUERY_PERSONS_BY_TEAM_ID, query="select distinct p from Person p join p.teams t where t.id = :teamId"),
+        @NamedQuery(name=Person.NAMED_QUERY_PERSON_BY_NAME, query="select p from Person p where p.name = :name")
 })
 public class Person implements Comparable<Person> {
 
     public final static String NAMED_QUERY_PERSONS_BY_TEAM_ID = "query.persons.by.team.id";
+    public final static String NAMED_QUERY_PERSON_BY_NAME = "query.person.by.name";
 
 	private Integer id;
     @Id

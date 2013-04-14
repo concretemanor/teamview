@@ -1,4 +1,4 @@
-function StatusGrid(tableId, $) {
+function StatusGrid(ctx, tableId, $) {
     var editableGrid = new EditableGrid("TeamviewGridAttach");
     var valueMap;
 
@@ -8,7 +8,7 @@ function StatusGrid(tableId, $) {
 		cell.setAttribute("class",value ? value : "");
 		cell.innerHTML = valueMap[value];
 	    }});
-    
+	
 	for (i=1; i<=5; i++) {
 	    editableGrid.setCellRenderer(editableGrid.getColumnName(i),cellRenderer);
 	}};
@@ -25,7 +25,7 @@ function StatusGrid(tableId, $) {
             .attr('id');
 	$.ajax({
             type: "POST",
-            url: "update.action",
+            url: ctx + "/a/Update",
             data: { date: $('#refDate').val(),
                     dayIndex: columnIndex,
                     cellValue: newValue,
@@ -34,7 +34,7 @@ function StatusGrid(tableId, $) {
 
     this.load = function(teamId,date) {
 	$.ajax({type: "POST",
-		url: "load.action",
+		url: ctx + "/a/Load",
 		dataType: "json",
 		data: { "teamId" : teamId,
 			"date" : date },
@@ -45,3 +45,35 @@ function StatusGrid(tableId, $) {
 		}})
     };
 }
+
+function nonEmpty(element) {
+    return element.val().length != 0;
+}
+
+function noMatching(element) {
+    var name = $.trim(element.val());
+    return document.evaluate("//td[@class='namecolumn' and text()='"+name+"']",
+			     document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,
+			     null).singleNodeValue == null;
+}
+
+function installValidator(textId,validator,whenValid) {
+    var textElement = $("#"+textId);
+    textElement.on("change past input", function(e) {
+	var valid = validator(textElement);
+	$("#save-button").prop("disabled",!valid);
+	var formElement = $("#form");
+	if (valid) {
+            formElement.off("submit");
+	    if (whenValid != null) {
+		whenValid();
+	    }
+	}
+	else {
+            formElement.submit(function() {
+		return false;
+	    });
+	}
+    });
+}
+    

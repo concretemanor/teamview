@@ -19,8 +19,8 @@ import com.google.gson.Gson;
 import concretemanor.tools.teamview.domain.Team;
 import concretemanor.tools.teamview.service.WeekStatus;
 
-@UrlBinding("/load.action")
-public class LoadActionBean extends ActionBeanBase implements ActionBean {
+@UrlBinding("/a/Load")
+public class LoadActionBean extends PersonActionTeamBase implements ActionBean {
     private static Log loggie = Log.getInstance(LoadActionBean.class);
     
     private Integer teamId = null;

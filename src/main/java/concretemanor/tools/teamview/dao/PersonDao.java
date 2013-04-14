@@ -17,6 +17,13 @@ public interface PersonDao {
      * @return Person
      */
     public Person get(Integer id);
+    
+    /**
+     * Gets the Person object by its name
+     * @param name person's name
+     * @return Person object or null if no such person
+     */
+    public Person getByName(String name);
 
     /**
      * Gets a list of Person objects that belong to a specific Team
@@ -24,6 +31,15 @@ public interface PersonDao {
      * @return List
      */
     public List<Person> getByTeam(Team team);
+    
+    /**
+     * Gets a list of Person objects that do not belong to the specific Team
+     * and whose name begins with the specific prefix.
+     * @param team Team that the Person members do not belong to
+     * @param namePrefix All returned Person name begin with this prefix
+     * @return List (possibly empty)
+     */
+    public List<Person> getByNotTeam(Team team,String namePrefix,int maxRows);
 
     /**
      * Saves the Team object

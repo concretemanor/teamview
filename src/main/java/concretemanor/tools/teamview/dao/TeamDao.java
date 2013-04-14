@@ -36,5 +36,9 @@ public interface TeamDao {
      * @return
      */
     public Team save(Team team);
-
+    
+    /**
+     * Deletes a Team
+     */
+    public void delete(Team team);
 }

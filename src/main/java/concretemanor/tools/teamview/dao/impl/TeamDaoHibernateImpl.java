@@ -48,7 +48,12 @@ public class TeamDaoHibernateImpl implements TeamDao {
 
     @Override
     public Team save(Team team) throws HibernateException {
-        sessionFactory.getCurrentSession().save(team);
+        sessionFactory.getCurrentSession().saveOrUpdate(team);
         return team;
+    }
+    
+    @Override
+    public void delete(Team team) throws HibernateException {
+    	sessionFactory.getCurrentSession().delete(team);
     }
 }

@@ -11,8 +11,8 @@ import net.sourceforge.stripes.util.Log;
 import concretemanor.tools.teamview.domain.Status;
 import concretemanor.tools.teamview.service.IService;
 
-@UrlBinding("/update.action")
-public class UpdateActionBean extends ActionBeanBase implements ActionBean {
+@UrlBinding("/a/Update")
+public class UpdateActionBean extends PersonActionTeamBase implements ActionBean {
 	private static Log loggie = Log.getInstance(UpdateActionBean.class);
 
 	@SpringBean
