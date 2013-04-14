@@ -62,6 +62,7 @@
     <init-param>
       <param-name>Interceptor.Classes</param-name>
       <param-value>
+        concretemanor.tools.teamview.stripes.XssInterceptor,
       	net.sourceforge.stripes.integration.spring.SpringInterceptor,
 	net.sourceforge.stripes.controller.BeforeAfterMethodInterceptor
       </param-value>
@@ -106,6 +107,31 @@
 
   <servlet-mapping>
     <servlet-name>StripesDispatcher</servlet-name>
+    <!--
     <url-pattern>*.action</url-pattern>
+    -->
+    <url-pattern>/a/*</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>StripesDispatcher</servlet-name>
+    <url-pattern>*.action</url-pattern> <!-- only for backwards compatibility -->
+  </servlet-mapping>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>admin pages</web-resource-name>
+      <url-pattern>/listteams.action</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
 </web-app>
